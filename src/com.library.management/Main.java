@@ -1,23 +1,46 @@
 
+package com.library.management;
+
+import com.library.management.model.Book;
+import com.library.management.model.Patron;
+
+import com.library.management.service.BookService;
+import com.library.management.service.PatronService;
+import com.library.management.service.LibraryService;
+import com.library.management.service.LendingService;
+
+import com.library.management.repository.BookRepository;
+import com.library.management.repository.PatronRepository;
+
+import com.library.management.designpatterns.factory.BookFactory;
+
+import com.library.management.designpatterns.observer.PatronObserver;
+import com.library.management.designpatterns.observer.ReservationNotifier;
+
+import com.library.management.util.LoggerUtil;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        // Initialize repositories
+        BookRepository bookRepository = new BookRepository();
+        PatronRepository patronRepository = new PatronRepository();
+
         // Initialize services
-        BookService bookService = new BookService();
-        PatronService patronService = new PatronService();
-        LibraryService libraryService = new LibraryService(bookService, patronService);
+        BookService bookService = new BookService(bookRepository);
+        PatronService patronService = new PatronService(patronRepository);
+        LendingService lendingService = new LendingService(bookRepository);
+        LibraryService libraryService = new LibraryService(bookService, patronService, lendingService);
+
+        LoggerUtil.logInfo("Library Management System Started");
 
         // Create books using Factory Pattern
-        Book book1 = BookFactory.createBook("Clean Code", "Robert Martin", "101", 2008);
-        Book book2 = BookFactory.createBook("Effective Java", "Joshua Bloch", "102", 2018);
+        Book book1 = BookFactory.createBook("Clean Code", "Robert Martin", "ISBN101", 2008);
+        Book book2 = BookFactory.createBook("Effective Java", "Joshua Bloch", "ISBN102", 2018);
 
-        // Add books to library
         bookService.addBook(book1);
         bookService.addBook(book2);
-
-        LoggerUtil.logInfo("Books added to library");
 
         // Create patrons
         Patron patron1 = new Patron("P1", "Priya");
@@ -26,20 +49,13 @@ public class Main {
         patronService.addPatron(patron1);
         patronService.addPatron(patron2);
 
-        LoggerUtil.logInfo("Patrons added");
-
         // Checkout book
-        libraryService.checkoutBook("101", "P1");
-
-        // Show borrowed books
-        libraryService.showBorrowedBooks();
+        libraryService.checkoutBook("ISBN101", "P1");
 
         // Return book
-        libraryService.returnBook("101", "P1");
+        libraryService.returnBook("ISBN101", "P1");
 
-        LoggerUtil.logInfo("Book returned");
-
-        // ---------- Observer Pattern Example ----------
+        // -------- Observer Pattern Demo --------
 
         ReservationNotifier notifier = new ReservationNotifier();
 
@@ -49,7 +65,8 @@ public class Main {
         notifier.addObserver(observer1);
         notifier.addObserver(observer2);
 
-        notifier.notifyObservers("Book 'Clean Code' is now available!");
+        notifier.notifyObservers("Book 'Clean Code' is now available.");
 
+        LoggerUtil.logInfo("Library Management System Finished");
     }
 }
