@@ -30,8 +30,8 @@ public class Main {
         // Initialize services
         BookService bookService = new BookService(bookRepository);
         PatronService patronService = new PatronService(patronRepository);
-        LendingService lendingService = new LendingService(bookRepository);
-        LibraryService libraryService = new LibraryService(bookService, patronService, lendingService);
+
+        LibraryService libraryService = new LibraryService(bookService, patronService);
 
         LoggerUtil.logInfo("Library Management System Started");
 
@@ -68,5 +68,6 @@ public class Main {
         notifier.notifyObservers("Book 'Clean Code' is now available.");
 
         LoggerUtil.logInfo("Library Management System Finished");
+
     }
 }

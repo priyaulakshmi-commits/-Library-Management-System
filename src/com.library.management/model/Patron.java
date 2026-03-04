@@ -12,6 +12,17 @@ public class Patron {
         this.name = name;
         this.borrowedBooks = new ArrayList<>();
     }
+    public String getPatronId() {
+        return patronId;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public void borrowBook(String isbn) {
         borrowedBooks.add(isbn);

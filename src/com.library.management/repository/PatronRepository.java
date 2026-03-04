@@ -1,5 +1,7 @@
 package com.library.management.repository;
 
+import com.library.management.model.Patron;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

@@ -1,5 +1,8 @@
 package com.library.management.service;
 
+import com.library.management.model.Book;
+import com.library.management.repository.BookRepository;
+
 import java.util.*;
 
 public class BookService {

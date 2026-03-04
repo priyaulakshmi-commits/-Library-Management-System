@@ -1,4 +1,9 @@
 package com.library.management.service;
+
+import com.library.management.model.Book;
+import com.library.management.model.Patron;
+import com.library.management.model.Loan;
+
 import java.util.ArrayList;
 import java.util.List;
 

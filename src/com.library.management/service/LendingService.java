@@ -1,4 +1,10 @@
 package com.library.management.service;
+
+import com.library.management.repository.BookRepository;
+
+import com.library.management.model.Patron;
+import com.library.management.model.Book;
+
 public class LendingService {
 
     private BookRepository bookRepository;

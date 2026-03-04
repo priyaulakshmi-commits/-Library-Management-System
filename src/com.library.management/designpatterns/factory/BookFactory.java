@@ -1,4 +1,5 @@
 package com.library.management.designpatterns.factory;
+import com.library.management.model.Book;
 
 public class BookFactory {
 
