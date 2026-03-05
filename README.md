@@ -1,4 +1,4 @@
-# Library-Management-System
+Class Diagram
 
                     +------------------+
                     |       Book       |
